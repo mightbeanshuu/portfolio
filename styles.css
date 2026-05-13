@@ -47,6 +47,37 @@ a { color: inherit; text-decoration: none; transition: color .15s ease; }
 a:hover { color: var(--accent); }
 img { max-width: 100%; display: block; }
 
+/* --- Custom cursor --- */
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+.cursor-dot {
+  width: 7px; height: 7px;
+  background: #f5f5ff;
+  --x: -100px; --y: -100px;
+  transform: translate3d(var(--x), var(--y), 0) translate(-50%, -50%);
+}
+.cursor-ring {
+  width: 38px; height: 38px;
+  border: 1.5px solid #f5f5ff;
+  --x: -100px; --y: -100px;
+  --scale: 1;
+  transform: translate3d(var(--x), var(--y), 0) translate(-50%, -50%) scale(var(--scale));
+  transition: transform .18s ease-out, border-color .18s ease-out, opacity .18s;
+  opacity: 0.85;
+}
+.cursor-ring.hover { --scale: 1.6; opacity: 0.4; }
+.cursor-ring.press { --scale: 0.8; }
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
 /* --- Scroll progress --- */
 .scroll-progress {
   position: fixed;
@@ -196,6 +227,20 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 32px; position: relative; z
   align-items: center;
   padding: 90px 0 60px;
   min-height: 78vh;
+  position: relative;
+}
+.hero-particles {
+  position: absolute;
+  inset: -40px -30px;
+  width: calc(100% + 60px);
+  height: calc(100% + 80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+.hero > *:not(.hero-particles) {
+  position: relative;
+  z-index: 2;
 }
 @media (max-width: 980px) {
   .hero { grid-template-columns: 1fr; gap: 40px; padding: 48px 0; min-height: 0; }
@@ -972,4 +1017,92 @@ footer a:hover { color: var(--accent); }
 .reveal.in {
   opacity: 1;
   transform: none;
+}
+
+/* --- Magnetic buttons --- */
+.magnetic {
+  display: inline-block;
+  transition: transform .3s cubic-bezier(.2, .7, .2, 1);
+  will-change: transform;
+}
+
+/* --- 3D Tilt + spotlight on cards --- */
+.project,
+.stat,
+.skill-col,
+.contact-grid a,
+.now-card,
+.awards li,
+.spotlight {
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 50%;
+  --my: 50%;
+  transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition: transform .25s cubic-bezier(.2, .7, .2, 1),
+              border-color .25s ease,
+              background .25s ease;
+  will-change: transform;
+}
+.project::after,
+.stat::after,
+.skill-col::after,
+.contact-grid a::after,
+.now-card::after,
+.awards li::after,
+.spotlight::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--mx) var(--my),
+    rgba(139, 124, 255, 0.18),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.project:hover::after,
+.stat:hover::after,
+.skill-col:hover::after,
+.contact-grid a:hover::after,
+.now-card:hover::after,
+.awards li:hover::after,
+.spotlight:hover::after {
+  opacity: 1;
+}
+
+/* Tilted cards need their content lifted above the spotlight ::after */
+.project > *,
+.stat > *,
+.skill-col > *,
+.contact-grid a > *,
+.now-card > *,
+.awards li > *,
+.spotlight > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Drop default lift on tilted cards — tilt does the movement */
+.project:hover,
+.stat:hover,
+.skill-col:hover,
+.contact-grid a:hover,
+.awards li:hover {
+  transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));
+}
+
+/* --- Scramble char (preserve width slightly) --- */
+.scramble { display: inline-block; min-width: 0.5ch; }
+
+@media (hover: none), (pointer: coarse) {
+  .magnetic { transform: none !important; }
+  .project, .stat, .skill-col, .contact-grid a, .now-card, .awards li, .spotlight {
+    transform: none;
+  }
 }
