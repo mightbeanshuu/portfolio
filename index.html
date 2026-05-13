@@ -15,26 +15,38 @@
   <link rel="icon" type="image/jpeg" href="assets/profile.jpeg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
 </head>
 <body>
+  <div class="cursor-glow" aria-hidden="true"></div>
   <div class="bg-grid" aria-hidden="true"></div>
   <div class="bg-glow" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
   <header class="nav">
     <a class="brand" href="#top">
       <span class="brand-mark">▓</span>
-      <span class="brand-name">anshu</span>
+      <span class="brand-name">anshu<span class="brand-dot">.</span></span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#achievements">Achievements</a>
-      <a href="#contact">Contact</a>
+      <a href="#about"><span class="link-num">01</span> About</a>
+      <a href="#projects"><span class="link-num">02</span> Work</a>
+      <a href="#skills"><span class="link-num">03</span> Stack</a>
+      <a href="#achievements"><span class="link-num">04</span> Stats</a>
+      <a href="#contact"><span class="link-num">05</span> Contact</a>
     </nav>
-    <a class="nav-cta" href="mailto:amananshu2004@gmail.com">Get in touch →</a>
+    <a class="nav-cta" href="mailto:amananshu2004@gmail.com">
+      <span class="cta-dot"></span> Hire me
+    </a>
   </header>
 
   <main id="top">
@@ -42,41 +54,100 @@
     <section class="hero">
       <div class="hero-text">
         <div class="kicker">
-          <span class="dot"></span> Available for internships &amp; collaborations
+          <span class="dot"></span> Available for SWE internships · Summer 2026
         </div>
         <h1>
-          Hi, I'm <span class="grad">Anshu Aman</span>.<br />
-          I build full-stack products that ship.
+          Full-stack <span class="grad-1">dev</span>.<br />
+          Sometimes <span class="serif">co-founder</span>.<br />
+          Always <span class="grad-2">shipping</span>.
         </h1>
         <p class="lede">
-          Full-stack developer, co-founder, and tech lead. I work across React, Node, and ML to
-          turn ideas into production software — from agri-tech for farmers to campus tooling for
-          students at BIT Mesra.
+          I'm <strong>Anshu Aman</strong> — I build production software end-to-end. From an
+          agri-tech startup feeding ML crop recommendations to farmers, to campus tooling used
+          across BIT Mesra. React, Node, Postgres, and a lot of curiosity.
         </p>
         <div class="cta-row">
-          <a class="btn primary" href="#projects">See my work</a>
+          <a class="btn primary" href="#projects">
+            See my work
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
           <a class="btn ghost" href="https://github.com/mightbeanshuu" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.71 1.26 3.37.97.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.2-3.1-.12-.3-.52-1.48.11-3.08 0 0 .98-.31 3.2 1.18.93-.26 1.93-.39 2.92-.39s1.99.13 2.92.39c2.22-1.49 3.2-1.18 3.2-1.18.63 1.6.23 2.78.11 3.08.75.81 1.2 1.84 1.2 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56C20.21 21.38 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.71 1.26 3.37.97.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.2-3.1-.12-.3-.52-1.48.11-3.08 0 0 .98-.31 3.2 1.18.93-.26 1.93-.39 2.92-.39s1.99.13 2.92.39c2.22-1.49 3.2-1.18 3.2-1.18.63 1.6.23 2.78.11 3.08.75.81 1.2 1.84 1.2 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56C20.21 21.38 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
             GitHub
           </a>
         </div>
-        <div class="social-row" aria-label="Social links">
-          <a href="https://github.com/mightbeanshuu" target="_blank" rel="noopener" title="GitHub">github</a>
-          <span aria-hidden="true">·</span>
-          <a href="https://leetcode.com/u/freaky_coder_151/" target="_blank" rel="noopener" title="LeetCode">leetcode</a>
-          <span aria-hidden="true">·</span>
-          <a href="https://codeforces.com/profile/freakycoder_151" target="_blank" rel="noopener" title="Codeforces">codeforces</a>
-          <span aria-hidden="true">·</span>
-          <a href="mailto:amananshu2004@gmail.com" title="Email">email</a>
+        <div class="hero-meta">
+          <div class="meta-item">
+            <span class="meta-num">11+</span>
+            <span class="meta-label">repos</span>
+          </div>
+          <div class="meta-sep"></div>
+          <div class="meta-item">
+            <span class="meta-num">250+</span>
+            <span class="meta-label">leetcode</span>
+          </div>
+          <div class="meta-sep"></div>
+          <div class="meta-item">
+            <span class="meta-num">1340</span>
+            <span class="meta-label">codeforces</span>
+          </div>
+          <div class="meta-sep"></div>
+          <div class="meta-item">
+            <span class="meta-num">200+</span>
+            <span class="meta-label">devs reached</span>
+          </div>
         </div>
       </div>
 
-      <div class="hero-photo" aria-hidden="false">
-        <div class="photo-ring">
-          <img src="assets/profile.jpeg" alt="Anshu Aman" width="420" height="420" />
+      <div class="hero-robot">
+        <div class="robot-stage">
+          <canvas id="robot-canvas" aria-label="Interactive 3D robot that follows your cursor"></canvas>
+          <div class="robot-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2l-2 7h6l-8 13 2-9H5z"/></svg>
+            move your mouse
+          </div>
+          <div class="robot-tag tag-top">SYS://online</div>
+          <div class="robot-tag tag-bot">v.4.7 · ANSHU-OS</div>
         </div>
-        <div class="badge badge-tl">B.Tech CSE · BIT Mesra</div>
-        <div class="badge badge-br">Co-founder · GDG Tech Lead</div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <section class="marquee-wrap" aria-hidden="true">
+      <div class="marquee">
+        <div class="marquee-track">
+          <span>React</span><span>·</span>
+          <span>Next.js</span><span>·</span>
+          <span>TypeScript</span><span>·</span>
+          <span>Node.js</span><span>·</span>
+          <span>Express</span><span>·</span>
+          <span>PostgreSQL</span><span>·</span>
+          <span>MongoDB</span><span>·</span>
+          <span>C++</span><span>·</span>
+          <span>Python</span><span>·</span>
+          <span>JWT</span><span>·</span>
+          <span>REST APIs</span><span>·</span>
+          <span>Tailwind</span><span>·</span>
+          <span>Git</span><span>·</span>
+          <span>Claude</span><span>·</span>
+          <span>OpenAI</span><span>·</span>
+          <!-- duplicate for seamless loop -->
+          <span>React</span><span>·</span>
+          <span>Next.js</span><span>·</span>
+          <span>TypeScript</span><span>·</span>
+          <span>Node.js</span><span>·</span>
+          <span>Express</span><span>·</span>
+          <span>PostgreSQL</span><span>·</span>
+          <span>MongoDB</span><span>·</span>
+          <span>C++</span><span>·</span>
+          <span>Python</span><span>·</span>
+          <span>JWT</span><span>·</span>
+          <span>REST APIs</span><span>·</span>
+          <span>Tailwind</span><span>·</span>
+          <span>Git</span><span>·</span>
+          <span>Claude</span><span>·</span>
+          <span>OpenAI</span><span>·</span>
+        </div>
       </div>
     </section>
 
@@ -84,62 +155,107 @@
     <section id="about" class="section">
       <div class="section-head">
         <span class="section-num">01</span>
-        <h2>About</h2>
+        <h2>The story so far</h2>
       </div>
       <div class="about-grid">
         <div class="about-copy">
+          <div class="about-portrait">
+            <img src="assets/profile.jpeg" alt="Anshu Aman" />
+          </div>
           <p>
-            I'm a B.Tech Computer Science student at <strong>BIT Mesra</strong> (2023–2027), and I spend
-            most of my time shipping real products. I co-founded an agri-tech startup that
-            recommends crops to farmers based on soil parameters, and I lead technical initiatives
-            for <strong>Google Developer Groups on Campus</strong> — workshops and hackathons that
-            have reached 200+ student developers.
+            I'm a B.Tech CSE student at <strong>BIT Mesra</strong> (2023–2027). Most of my time
+            goes into shipping real products. I <strong>co-founded an agri-tech startup</strong>
+            that recommends crops to farmers based on soil parameters using ML, and I'm
+            <strong>tech lead at Google Developer Groups on Campus</strong> — running workshops
+            and hackathons that have reached 200+ student developers.
           </p>
           <p>
-            I care about products that are <em>useful</em>: small, fast, well-engineered systems
-            that solve real problems. Lately I've been building with React, Node, and a growing
-            interest in LLM tooling.
+            I care about products that are <em>actually useful</em>: small, fast, well-engineered
+            systems that solve real problems. Lately I've been deep on LLM tooling, full-stack
+            performance, and the slow craft of writing software people don't have to think about.
           </p>
+          <div class="now-card">
+            <span class="now-label">// now</span>
+            <div class="now-rows">
+              <div class="now-row"><b>Building</b><span>TestSense-AI · Claude × OpenAI test analyzer</span></div>
+              <div class="now-row"><b>Learning</b><span>Distributed systems · Rust</span></div>
+              <div class="now-row"><b>Reading</b><span>Designing Data-Intensive Applications</span></div>
+            </div>
+          </div>
         </div>
         <aside class="quickfacts">
-          <h3>Quick facts</h3>
+          <div class="qf-header">
+            <span class="qf-dot"></span>
+            <h3>Quick facts</h3>
+          </div>
           <ul>
             <li><span>Role</span><b>Full-stack developer</b></li>
-            <li><span>Location</span><b>BIT Mesra, India</b></li>
-            <li><span>Degree</span><b>B.Tech CSE · 2027</b></li>
+            <li><span>Location</span><b>BIT Mesra, IN</b></li>
+            <li><span>Degree</span><b>B.Tech CSE · '27</b></li>
             <li><span>CGPA</span><b>7.67</b></li>
             <li><span>Focus</span><b>Web · ML · DSA</b></li>
             <li><span>Open to</span><b>SWE internships</b></li>
+            <li><span>Best at</span><b>Shipping fast</b></li>
+            <li><span>Coffee</span><b>Always</b></li>
           </ul>
         </aside>
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="section">
+    <!-- SPOTLIGHT PROJECT -->
+    <section class="section">
       <div class="section-head">
         <span class="section-num">02</span>
-        <h2>Selected projects</h2>
+        <h2>Selected work</h2>
       </div>
-      <div class="projects">
-        <article class="project">
-          <header>
-            <h3>DormDoc</h3>
-            <span class="tag">JavaScript</span>
-          </header>
-          <p>Campus medical-services system with role-based JWT auth, QR check-ins, and sub-100ms patient lookups. Streamlines student/staff care across the hostel network.</p>
-          <ul class="stack">
-            <li>Node</li><li>Express</li><li>MongoDB</li><li>JWT</li>
-          </ul>
-          <a class="proj-link" href="https://github.com/mightbeanshuu/DormDoc" target="_blank" rel="noopener">View repository →</a>
-        </article>
 
+      <article class="spotlight">
+        <div class="spotlight-text">
+          <span class="spotlight-tag">FEATURED</span>
+          <h3>DormDoc</h3>
+          <p class="spotlight-sub">Campus medical-services system used across hostel networks.</p>
+          <p class="spotlight-body">
+            A role-based platform replacing a paper-based intake process. Sub-100ms patient
+            lookups, JWT auth for staff/students/admin, and QR check-ins that cut wait time
+            for triage by ~60%. Built solo end-to-end.
+          </p>
+          <ul class="spotlight-stack">
+            <li>Node.js</li><li>Express</li><li>MongoDB</li><li>JWT</li><li>QR</li>
+          </ul>
+          <div class="spotlight-actions">
+            <a class="btn primary small" href="https://github.com/mightbeanshuu/DormDoc" target="_blank" rel="noopener">View on GitHub →</a>
+          </div>
+        </div>
+        <div class="spotlight-visual">
+          <div class="terminal">
+            <div class="term-header">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+              <span class="term-title">dormdoc — health-services.api</span>
+            </div>
+            <pre class="term-body"><span class="c-mute">$</span> <span class="c-accent">curl</span> -H "Bearer $TOKEN" \
+   /api/patients/lookup?qr=PT-2812
+<span class="c-mute">→</span> <span class="c-good">200 OK</span> <span class="c-mute">· 87ms</span>
+
+<span class="c-key">{</span>
+  <span class="c-prop">"id"</span>: <span class="c-str">"PT-2812"</span>,
+  <span class="c-prop">"name"</span>: <span class="c-str">"R. Sharma"</span>,
+  <span class="c-prop">"allergies"</span>: <span class="c-key">[</span><span class="c-str">"penicillin"</span><span class="c-key">]</span>,
+  <span class="c-prop">"lastVisit"</span>: <span class="c-str">"2026-04-22"</span>,
+  <span class="c-prop">"risk"</span>: <span class="c-str">"low"</span>
+<span class="c-key">}</span>
+
+<span class="c-mute">$</span> <span class="c-accent">_</span><span class="cursor-blink">▋</span></pre>
+          </div>
+        </div>
+      </article>
+
+      <div class="projects">
         <article class="project">
           <header>
             <h3>Soil Suitability App</h3>
             <span class="tag">Startup</span>
           </header>
-          <p>Co-founded agri-tech startup delivering ML-powered crop recommendations from soil parameters. Full React + Node/Express stack with a suitability-scoring model behind the API.</p>
+          <p>Co-founded agri-tech startup delivering ML-powered crop recommendations from soil parameters. Full React + Node stack with a suitability-scoring model.</p>
           <ul class="stack">
             <li>React</li><li>Node</li><li>Python</li><li>ML</li>
           </ul>
@@ -193,8 +309,16 @@
           </ul>
           <a class="proj-link" href="https://github.com/mightbeanshuu/strawvix" target="_blank" rel="noopener">View repository →</a>
         </article>
+
+        <article class="project ghost-card">
+          <header>
+            <h3>Next: open to ideas</h3>
+            <span class="tag">2026</span>
+          </header>
+          <p>Got an interesting problem? I'm always down to build something new. Reach out — I respond fast.</p>
+          <a class="proj-link" href="mailto:amananshu2004@gmail.com">Drop me a line →</a>
+        </article>
       </div>
-      <p class="more">More on <a href="https://github.com/mightbeanshuu?tab=repositories" target="_blank" rel="noopener">GitHub →</a></p>
     </section>
 
     <!-- SKILLS -->
@@ -205,23 +329,23 @@
       </div>
       <div class="skills-grid">
         <div class="skill-col">
-          <h4>Languages</h4>
-          <ul><li>C</li><li>C++</li><li>JavaScript</li><li>TypeScript</li><li>SQL</li></ul>
+          <h4>// languages</h4>
+          <ul><li>C</li><li>C++</li><li>JavaScript</li><li>TypeScript</li><li>SQL</li><li>Python</li></ul>
         </div>
         <div class="skill-col">
-          <h4>Frontend</h4>
-          <ul><li>React</li><li>Next.js</li><li>HTML5</li><li>CSS3</li><li>Bootstrap</li></ul>
+          <h4>// frontend</h4>
+          <ul><li>React</li><li>Next.js</li><li>HTML5</li><li>CSS3</li><li>Bootstrap</li><li>Tailwind</li></ul>
         </div>
         <div class="skill-col">
-          <h4>Backend</h4>
-          <ul><li>Node.js</li><li>Express</li><li>REST APIs</li><li>JWT</li></ul>
+          <h4>// backend</h4>
+          <ul><li>Node.js</li><li>Express</li><li>REST APIs</li><li>JWT</li><li>WebSockets</li></ul>
         </div>
         <div class="skill-col">
-          <h4>Databases</h4>
+          <h4>// databases</h4>
           <ul><li>MongoDB</li><li>Mongoose</li><li>PostgreSQL</li><li>MySQL</li></ul>
         </div>
         <div class="skill-col">
-          <h4>Tools &amp; CS</h4>
+          <h4>// tools & cs</h4>
           <ul><li>Git</li><li>Postman</li><li>VS Code</li><li>DSA</li><li>OOP</li><li>OS · DBMS · CN</li></ul>
         </div>
       </div>
@@ -231,77 +355,88 @@
     <section id="achievements" class="section">
       <div class="section-head">
         <span class="section-num">04</span>
-        <h2>Numbers &amp; achievements</h2>
+        <h2>Numbers don't lie</h2>
       </div>
       <div class="stats">
         <div class="stat">
-          <div class="stat-num">250<span>+</span></div>
+          <div class="stat-num" data-count="250" data-suffix="+">0</div>
           <div class="stat-label">LeetCode problems solved</div>
         </div>
         <div class="stat">
-          <div class="stat-num">400<span>+</span></div>
+          <div class="stat-num" data-count="400" data-suffix="+">0</div>
           <div class="stat-label">DSA problems completed</div>
         </div>
         <div class="stat">
-          <div class="stat-num">1340</div>
+          <div class="stat-num" data-count="1340">0</div>
           <div class="stat-label">Codeforces rating · Pupil</div>
         </div>
         <div class="stat">
-          <div class="stat-num">1,529</div>
+          <div class="stat-num" data-count="1529">0</div>
           <div class="stat-label">Best CF rank / 40k+</div>
         </div>
         <div class="stat">
-          <div class="stat-num">200<span>+</span></div>
-          <div class="stat-label">Devs reached via GDG events</div>
+          <div class="stat-num" data-count="200" data-suffix="+">0</div>
+          <div class="stat-label">Devs reached via GDG</div>
         </div>
         <div class="stat">
-          <div class="stat-num">93%</div>
+          <div class="stat-num" data-count="93" data-suffix="%">0</div>
           <div class="stat-label">CBSE Class XII</div>
         </div>
       </div>
+
+      <div class="gh-stats">
+        <img loading="lazy" src="https://github-readme-stats.vercel.app/api?username=mightbeanshuu&hide_border=true&bg_color=14161f&title_color=8b7cff&icon_color=7ee7c4&text_color=a4a7b8&include_all_commits=true" alt="GitHub stats" />
+        <img loading="lazy" src="https://github-readme-streak-stats.herokuapp.com?user=mightbeanshuu&hide_border=true&background=14161F&stroke=23263433&ring=8b7cff&fire=ffb37c&currStreakLabel=7ee7c4&sideLabels=a4a7b8&dates=a4a7b8&currStreakNum=e7e9f3&sideNums=e7e9f3" alt="GitHub streak" />
+        <img loading="lazy" src="https://github-readme-stats.vercel.app/api/top-langs/?username=mightbeanshuu&layout=compact&hide_border=true&bg_color=14161f&title_color=8b7cff&text_color=a4a7b8" alt="Top languages" />
+      </div>
+
       <ul class="awards">
-        <li><b>NTSE Scholar</b> · Mathematics Olympiad zonal ranker</li>
-        <li><b>JEE Mains 2023</b> · AIR 17,443</li>
-        <li><b>CBSE Class X</b> · 94.4%</li>
+        <li><span class="medal">🏆</span><div><b>NTSE Scholar</b><span>Mathematics Olympiad zonal ranker</span></div></li>
+        <li><span class="medal">📈</span><div><b>JEE Mains 2023</b><span>AIR 17,443</span></div></li>
+        <li><span class="medal">🎓</span><div><b>CBSE Class X</b><span>94.4% — top of grade cohort</span></div></li>
       </ul>
     </section>
 
     <!-- CONTACT -->
     <section id="contact" class="section contact">
-      <div class="section-head">
+      <div class="section-head center">
         <span class="section-num">05</span>
         <h2>Let's build something</h2>
       </div>
       <p class="contact-lede">
-        I'm open to internships, freelance work, and interesting collaborations. The fastest way
-        to reach me is email — I read everything.
+        I'm open to internships, freelance work, and interesting collaborations.<br />
+        The fastest way to reach me is email — I read everything.
       </p>
       <div class="contact-actions">
-        <a class="btn primary" href="mailto:amananshu2004@gmail.com">amananshu2004@gmail.com</a>
+        <a class="btn primary" href="mailto:amananshu2004@gmail.com">
+          amananshu2004@gmail.com
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
         <a class="btn ghost" href="https://github.com/mightbeanshuu" target="_blank" rel="noopener">GitHub →</a>
       </div>
       <div class="contact-grid">
         <a href="https://github.com/mightbeanshuu" target="_blank" rel="noopener">
-          <h4>GitHub</h4><span>@mightbeanshuu</span>
+          <h4>// github</h4><span>@mightbeanshuu</span>
         </a>
         <a href="https://leetcode.com/u/freaky_coder_151/" target="_blank" rel="noopener">
-          <h4>LeetCode</h4><span>freaky_coder_151</span>
+          <h4>// leetcode</h4><span>freaky_coder_151</span>
         </a>
         <a href="https://codeforces.com/profile/freakycoder_151" target="_blank" rel="noopener">
-          <h4>Codeforces</h4><span>freakycoder_151</span>
+          <h4>// codeforces</h4><span>freakycoder_151</span>
         </a>
         <a href="mailto:amananshu2004@gmail.com">
-          <h4>Email</h4><span>amananshu2004@gmail.com</span>
+          <h4>// email</h4><span>amananshu2004@gmail.com</span>
         </a>
       </div>
     </section>
   </main>
 
   <footer>
-    <span>© <span id="year"></span> Anshu Aman · Built with HTML, CSS &amp; a lot of chai.</span>
+    <span>© <span id="year"></span> Anshu Aman · Built with HTML, CSS, three.js &amp; a lot of chai.</span>
     <a href="#top">Back to top ↑</a>
   </footer>
 
   <script src="script.js"></script>
+  <script type="module" src="robot.js"></script>
 </body>
 </html>
