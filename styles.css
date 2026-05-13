@@ -104,6 +104,18 @@ img { max-width: 100%; display: block; }
   transition: background-position .1s ease-out;
 }
 
+/* --- WebGL fluid background --- */
+.fluid-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -3;
+  opacity: 0.55;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
 /* --- Backgrounds --- */
 .bg-grid {
   position: fixed; inset: 0; z-index: -2;
@@ -1001,12 +1013,297 @@ footer {
 footer a { color: var(--text-dim); }
 footer a:hover { color: var(--accent); }
 
+/* --- Text reveal (word stagger) --- */
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0 0.04em;
+  margin: 0 -0.04em;
+}
+.word-inner {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform .85s cubic-bezier(.2, .8, .2, 1);
+  transition-delay: calc(var(--i, 0) * 45ms);
+  will-change: transform;
+}
+.in .word-inner { transform: translateY(0); }
+
+/* --- 3D project carousel --- */
+.carousel3d-wrap {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  perspective: 1500px;
+  perspective-origin: 50% 38%;
+  user-select: none;
+  margin-bottom: 24px;
+}
+.carousel3d-stage {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+}
+.carousel3d-stage.dragging { cursor: grabbing; }
+.carousel3d {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  width: 280px;
+  height: 360px;
+  margin-left: -140px;
+  transform-style: preserve-3d;
+  transform: translateZ(-360px) rotateY(var(--rot, 0deg));
+  transition: transform .9s cubic-bezier(.2, .8, .2, 1);
+  will-change: transform;
+}
+.carousel3d.dragging { transition: none; }
+
+.c3d-card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: linear-gradient(160deg, var(--surface) 0%, var(--surface-2) 100%);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 26px 26px 24px;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  backface-visibility: hidden;
+  transform: rotateY(calc(var(--i) * 60deg)) translateZ(360px);
+  transition: border-color .25s ease, background .25s ease, box-shadow .25s ease, opacity .35s ease;
+  overflow: hidden;
+}
+.c3d-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 50% at 50% 0%, rgba(139,124,255,0.18), transparent 70%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+.c3d-card.active {
+  border-color: var(--accent);
+  box-shadow: 0 30px 60px -25px rgba(139,124,255,0.5);
+}
+.c3d-card.active::before { opacity: 1; }
+.c3d-card:not(.active) { opacity: 0.55; }
+.c3d-card.c3d-ghost {
+  background:
+    repeating-linear-gradient(45deg, transparent 0, transparent 6px, rgba(139,124,255,0.04) 6px, rgba(139,124,255,0.04) 12px),
+    var(--surface);
+  border-style: dashed;
+}
+
+.c3d-num {
+  position: absolute;
+  top: 18px; right: 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+.c3d-tag {
+  align-self: flex-start;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  background: rgba(139, 124, 255, 0.12);
+  padding: 4px 9px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.c3d-card h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.c3d-card p {
+  color: var(--text-dim);
+  font-size: 13.5px;
+  margin: 0;
+  flex: 1;
+}
+.c3d-stack {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.c3d-stack li {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+.c3d-arrow {
+  position: absolute;
+  bottom: 22px; right: 26px;
+  color: var(--accent);
+  font-size: 22px;
+  font-family: 'JetBrains Mono', monospace;
+  transition: transform .25s ease;
+}
+.c3d-card.active .c3d-arrow { transform: translateX(4px); }
+
+.carousel3d-ctrl {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 3;
+}
+.c3d-nav {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .15s ease;
+}
+.c3d-nav:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: scale(1.06);
+}
+.c3d-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--text-dim);
+  display: flex; gap: 4px;
+  min-width: 56px;
+  justify-content: center;
+}
+.c3d-current { color: var(--text); font-weight: 600; }
+.c3d-divider { color: var(--text-mute); }
+.c3d-hint {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-mute);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .carousel3d-wrap { height: 440px; }
+  .carousel3d {
+    width: 230px;
+    height: 320px;
+    margin-left: -115px;
+    transform: translateZ(-300px) rotateY(var(--rot, 0deg));
+  }
+  .c3d-card { transform: rotateY(calc(var(--i) * 60deg)) translateZ(300px); padding: 22px; }
+  .c3d-card h3 { font-size: 20px; }
+}
+
+/* --- Physics drag chip --- */
+.phys-chip {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px 9px 11px;
+  background: rgba(20, 22, 31, 0.7);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  will-change: transform;
+  box-shadow: var(--shadow);
+  transition: border-color .2s, color .2s;
+}
+.phys-chip:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+.phys-chip.dragging { cursor: grabbing; }
+.phys-grip {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: -2px;
+}
+@media (max-width: 600px) {
+  .phys-chip { bottom: 16px; right: 16px; }
+}
+
+/* --- Matrix canvas --- */
+.matrix-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.matrix-canvas.on { opacity: 0.95; }
+.matrix-msg {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 9001;
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid #00ff88;
+  color: #00ff88;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  padding: 10px 18px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s, transform .4s;
+  letter-spacing: 0.08em;
+}
+.matrix-msg.on {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* --- Motion --- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+  .fluid-canvas { display: none; }
+  .hero-particles { display: none; }
+  .phys-chip { display: none; }
 }
 
 .reveal {

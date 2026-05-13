@@ -360,8 +360,20 @@ function initRobot(canvas) {
   resize();
 
   // Pause when offscreen / tab hidden
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) running = false;
-    else { running = true; animate(); }
-  });
+  let visible = true;
+  function syncRunning() {
+    const should = visible && !document.hidden;
+    if (should && !running) {
+      running = true;
+      animate();
+    } else if (!should) {
+      running = false;
+    }
+  }
+  document.addEventListener('visibilitychange', syncRunning);
+  const visIO = new IntersectionObserver((entries) => {
+    for (const e of entries) visible = e.isIntersecting;
+    syncRunning();
+  }, { threshold: 0 });
+  visIO.observe(canvas);
 }

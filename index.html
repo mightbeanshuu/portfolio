@@ -27,12 +27,21 @@
   </script>
 </head>
 <body>
+  <canvas class="fluid-canvas" id="fluidCanvas" aria-hidden="true"></canvas>
   <div class="cursor-glow" aria-hidden="true"></div>
   <div class="bg-grid" aria-hidden="true"></div>
   <div class="bg-glow" aria-hidden="true"></div>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
   <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <div class="phys-chip" id="physChip" aria-label="Draggable chip">
+    <span class="phys-grip">::</span>
+    <span class="phys-label">drag me</span>
+  </div>
+
+  <canvas class="matrix-canvas" id="matrixCanvas" aria-hidden="true"></canvas>
+  <div class="matrix-msg" id="matrixMsg" aria-hidden="true">// KONAMI MODE · press ESC to exit</div>
 
   <header class="nav">
     <a class="brand" href="#top">
@@ -256,75 +265,73 @@
         </div>
       </article>
 
-      <div class="projects">
-        <article class="project">
-          <header>
-            <h3>Soil Suitability App</h3>
-            <span class="tag">Startup</span>
-          </header>
-          <p>Co-founded agri-tech startup delivering ML-powered crop recommendations from soil parameters. Full React + Node stack with a suitability-scoring model.</p>
-          <ul class="stack">
-            <li>React</li><li>Node</li><li>Python</li><li>ML</li>
-          </ul>
-          <a class="proj-link" href="https://github.com/mightbeanshuu/soil-suitability-app" target="_blank" rel="noopener">View repository →</a>
-        </article>
-
-        <article class="project">
-          <header>
-            <h3>TestSense-AI</h3>
-            <span class="tag">AI</span>
-          </header>
-          <p>AI-powered test-case analyser for corporate environments. Uses Claude and OpenAI to evaluate, dedupe, and prioritise test cases at scale.</p>
-          <ul class="stack">
-            <li>React</li><li>Node</li><li>Claude</li><li>OpenAI</li>
-          </ul>
-          <a class="proj-link" href="https://github.com/mightbeanshuu/TestSense-AI" target="_blank" rel="noopener">View repository →</a>
-        </article>
-
-        <article class="project">
-          <header>
-            <h3>Job-Tracker</h3>
-            <span class="tag">TypeScript</span>
-          </header>
-          <p>Pipeline dashboard managing 100+ job applications across stages with filters, notes, and reminders. Built for the placement grind.</p>
-          <ul class="stack">
-            <li>Next.js</li><li>TypeScript</li><li>PostgreSQL</li>
-          </ul>
-          <a class="proj-link" href="https://github.com/mightbeanshuu/Job-Tracker" target="_blank" rel="noopener">View repository →</a>
-        </article>
-
-        <article class="project">
-          <header>
-            <h3>CourseTracker-AI</h3>
-            <span class="tag">Chrome ext.</span>
-          </header>
-          <p>Chrome extension that auto-detects online-course platforms and tracks lecture progress with smart checklists.</p>
-          <ul class="stack">
-            <li>JavaScript</li><li>Chrome APIs</li>
-          </ul>
-          <a class="proj-link" href="https://github.com/mightbeanshuu/CourseTracker-AI" target="_blank" rel="noopener">View repository →</a>
-        </article>
-
-        <article class="project">
-          <header>
-            <h3>Strawvix</h3>
-            <span class="tag">Landing</span>
-          </header>
-          <p>Modern landing page for a service business focused on lead generation. Clean type, fast loads, conversion-first sections.</p>
-          <ul class="stack">
-            <li>HTML</li><li>CSS</li><li>JS</li>
-          </ul>
-          <a class="proj-link" href="https://github.com/mightbeanshuu/strawvix" target="_blank" rel="noopener">View repository →</a>
-        </article>
-
-        <article class="project ghost-card">
-          <header>
-            <h3>Next: open to ideas</h3>
-            <span class="tag">2026</span>
-          </header>
-          <p>Got an interesting problem? I'm always down to build something new. Reach out — I respond fast.</p>
-          <a class="proj-link" href="mailto:amananshu2004@gmail.com">Drop me a line →</a>
-        </article>
+      <div class="carousel3d-wrap" id="carouselWrap">
+        <div class="carousel3d-stage" id="carouselStage">
+          <div class="carousel3d" id="carousel3d">
+            <button class="c3d-card" data-i="0" type="button" data-href="https://github.com/mightbeanshuu/soil-suitability-app">
+              <span class="c3d-num">01</span>
+              <span class="c3d-tag">Startup</span>
+              <h3>Soil Suitability</h3>
+              <p>Co-founded agri-tech startup delivering ML-powered crop recommendations from soil parameters.</p>
+              <ul class="c3d-stack"><li>React</li><li>Node</li><li>ML</li></ul>
+              <span class="c3d-arrow" aria-hidden="true">→</span>
+            </button>
+            <button class="c3d-card" data-i="1" type="button" data-href="https://github.com/mightbeanshuu/TestSense-AI">
+              <span class="c3d-num">02</span>
+              <span class="c3d-tag">AI</span>
+              <h3>TestSense-AI</h3>
+              <p>AI test-case analyser for corporate environments. Uses Claude and OpenAI to evaluate, dedupe, and prioritise at scale.</p>
+              <ul class="c3d-stack"><li>React</li><li>Claude</li><li>OpenAI</li></ul>
+              <span class="c3d-arrow" aria-hidden="true">→</span>
+            </button>
+            <button class="c3d-card" data-i="2" type="button" data-href="https://github.com/mightbeanshuu/Job-Tracker">
+              <span class="c3d-num">03</span>
+              <span class="c3d-tag">TypeScript</span>
+              <h3>Job-Tracker</h3>
+              <p>Pipeline dashboard managing 100+ applications across stages with filters, notes, and reminders.</p>
+              <ul class="c3d-stack"><li>Next.js</li><li>TS</li><li>Postgres</li></ul>
+              <span class="c3d-arrow" aria-hidden="true">→</span>
+            </button>
+            <button class="c3d-card" data-i="3" type="button" data-href="https://github.com/mightbeanshuu/CourseTracker-AI">
+              <span class="c3d-num">04</span>
+              <span class="c3d-tag">Chrome ext.</span>
+              <h3>CourseTracker-AI</h3>
+              <p>Chrome extension that auto-detects online-course platforms and tracks lecture progress.</p>
+              <ul class="c3d-stack"><li>JS</li><li>Chrome APIs</li></ul>
+              <span class="c3d-arrow" aria-hidden="true">→</span>
+            </button>
+            <button class="c3d-card" data-i="4" type="button" data-href="https://github.com/mightbeanshuu/strawvix">
+              <span class="c3d-num">05</span>
+              <span class="c3d-tag">Landing</span>
+              <h3>Strawvix</h3>
+              <p>Modern landing page for a service business. Clean type, fast loads, conversion-first sections.</p>
+              <ul class="c3d-stack"><li>HTML</li><li>CSS</li><li>JS</li></ul>
+              <span class="c3d-arrow" aria-hidden="true">→</span>
+            </button>
+            <button class="c3d-card c3d-ghost" data-i="5" type="button" data-href="mailto:amananshu2004@gmail.com">
+              <span class="c3d-num">06</span>
+              <span class="c3d-tag">2026</span>
+              <h3>Your idea here</h3>
+              <p>Got an interesting problem? I'm always down to build something new. Reach out — I respond fast.</p>
+              <ul class="c3d-stack"><li>Drop me a line</li></ul>
+              <span class="c3d-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="carousel3d-ctrl">
+          <button class="c3d-nav" data-dir="-1" type="button" aria-label="Previous project">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="c3d-meta">
+            <span class="c3d-current" id="c3dCurrent">01</span>
+            <span class="c3d-divider">/</span>
+            <span class="c3d-total">06</span>
+          </div>
+          <button class="c3d-nav" data-dir="1" type="button" aria-label="Next project">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <div class="c3d-hint">drag · scroll · or use ← → keys</div>
       </div>
     </section>
 
@@ -445,5 +452,6 @@
 
   <script src="script.js"></script>
   <script type="module" src="robot.js"></script>
+  <script type="module" src="fluid.js"></script>
 </body>
 </html>
